@@ -1,6 +1,3 @@
-// BONUS 3:
-// Aggiungere bottoni di start/stop e di inversione del meccanismo di autoplay.
-
 const carouselWrapperDom = document.getElementById('carousel');
 const thumbnailWrapperDom = document.getElementById('thumbnails');
 const prevBtn = document.getElementById('prev_slide');
@@ -75,8 +72,6 @@ playPauseBtn.addEventListener('click', () =>{
         playPauseState = true;
     }
 });
-
-
 
 function nextslide(){
     slideIndex++;
