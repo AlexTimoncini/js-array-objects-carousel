@@ -5,3 +5,28 @@ margin: 0;
 padding: 0;
 box-sizing: border-box;
 }
+
+body{
+    height: 100vh;
+    background-color: rgb(124, 118, 151);
+    padding-top: 5rem;
+}
+
+section#jumbotron{
+    display: flex;
+    justify-content: center;
+    height: 50%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#carousel{
+    width: 80%;
+    background-color: red;
+}
+
+#thumbnails{
+    width: 20%;
+    background-color: blue;
+
+}
