@@ -35,10 +35,42 @@ section#jumbotron{
     background-position: center;
     background-size: cover;
     position: absolute;
+    opacity: 0;
+}
+
+.slide.active{
+    opacity: 1;
 }
 
 #thumbnails{
     background-color: blue;
     height: 20%;
     width: 100%;
+    position: relative;
+    cursor: pointer;
+}
+
+#thumbnails button{
+    border: none;
+    position: absolute;
+    height: 100%;
+    font-size: 4rem;
+    padding: 0 1rem;
+    color: #fff;
+    opacity: 0.3;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+#next_slide{
+    right: 0;
+    background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);    
+}
+
+#prev_slide{
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);    
+}
+
+#thumbnails:hover button{
+    opacity: 0.8;
 }

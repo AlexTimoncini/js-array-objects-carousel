@@ -37,8 +37,42 @@ const images = [
     }
 ];
 
+let slideNodeList = [];
+
 images.forEach(image => {
-    createSlide(carouselWrapperDom, image);
+    slideNodeList.push(createSlide(carouselWrapperDom, image));
+});
+
+const prevBtn = document.getElementById('prev_slide');
+const nextBtn = document.getElementById('next_slide');
+
+let slideIndex = 0;
+slideNodeList[slideIndex].classList.add('active');
+
+prevBtn.addEventListener('click', () => {
+    slideIndex--;
+    if (slideIndex < 0){
+        slideIndex = slideNodeList.length - 1;
+    }
+    slideNodeList[slideIndex].classList.add('active');
+    slideNodeList.forEach((slide, index) => {
+        if (index != slideIndex){
+            slide.classList.remove('active');
+        }
+    })
+});
+
+nextBtn.addEventListener('click', () => {
+    slideIndex++;
+    if (slideIndex > slideNodeList.length - 1){
+        slideIndex = 0;
+    }
+    slideNodeList[slideIndex].classList.add('active');
+    slideNodeList.forEach((slide, index) => {
+        if (index != slideIndex){
+            slide.classList.remove('active');
+        }
+    })
 });
 
 function createSlide(parentDom, object){
@@ -52,4 +86,5 @@ function createSlide(parentDom, object){
     slide.appendChild(slideTitle);
     slide.appendChild(slideDescription);
     parentDom.appendChild(slide);
+    return slide;
 }
