@@ -14,19 +14,31 @@ body{
 
 section#jumbotron{
     display: flex;
-    justify-content: center;
+    align-items: center;
     height: 50%;
     max-width: 1200px;
     margin: 0 auto;
+    flex-direction: column;
 }
 
 #carousel{
-    width: 80%;
+    height: 80%;
     background-color: red;
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+
+.slide{
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
 }
 
 #thumbnails{
-    width: 20%;
     background-color: blue;
-
+    height: 20%;
+    width: 100%;
 }

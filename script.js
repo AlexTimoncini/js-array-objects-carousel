@@ -1,9 +1,3 @@
-// Consegna:
-// Dato un array di oggetti letterali con:
-// url dell’immagine
-// titolo
-// descrizione
-// Creare un carosello come nella foto allegata.
 // Milestone 0:
 // Come nel primo carosello realizzato, focalizziamoci prima sulla creazione del markup statico: costruiamo il container e inseriamo l'immagine grande in modo da poter stilare lo slider.
 // Milestone 1: Ora rimuoviamo i contenuti statici e usiamo l’array di oggetti letterali per popolare dinamicamente il carosello.
@@ -16,6 +10,8 @@
 // Aggiungere funzionalità di autoplay: dopo un certo periodo di tempo (3 secondi) l’immagine attiva dovrà cambiare alla successiva.
 // BONUS 3:
 // Aggiungere bottoni di start/stop e di inversione del meccanismo di autoplay.
+
+const carouselWrapperDom = document.getElementById('carousel');
 
 const images = [
     {
@@ -40,3 +36,20 @@ const images = [
         text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
     }
 ];
+
+images.forEach(image => {
+    createSlide(carouselWrapperDom, image);
+});
+
+function createSlide(parentDom, object){
+    let slide = document.createElement('div');
+    slide.classList.add('slide');
+    slide.style.backgroundImage = "url('" + object.image + "')"
+    let slideTitle = document.createElement('h1');
+    slideTitle.innerHTML = object.title;
+    let slideDescription = document.createElement('p');
+    slideDescription.innerHTML = object.text;
+    slide.appendChild(slideTitle);
+    slide.appendChild(slideDescription);
+    parentDom.appendChild(slide);
+}
