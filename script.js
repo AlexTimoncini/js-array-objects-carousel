@@ -1,9 +1,3 @@
-// Milestone 0:
-// Come nel primo carosello realizzato, focalizziamoci prima sulla creazione del markup statico: costruiamo il container e inseriamo l'immagine grande in modo da poter stilare lo slider.
-// Milestone 1: Ora rimuoviamo i contenuti statici e usiamo l’array di oggetti letterali per popolare dinamicamente il carosello.
-// Al click dell'utente sulle frecce verso sinistra o destra, l'immagine attiva diventerà visibile e dovremo aggiungervi titolo e testo.
-// Milestone 2:
-// Aggiungere il ciclo infinito del carosello. Ovvero se la miniatura attiva è la prima e l'utente clicca la freccia verso l'alto, la miniatura che deve attivarsi sarà l'ultima e viceversa per l'ultima miniatura se l'utente clicca la freccia verso il basso.
 // BONUS 1:
 // Aggiungere le thumbnails (sottoforma di miniatura) ed al click attivare l’immagine corrispondente.
 // BONUS 2:
@@ -12,7 +6,9 @@
 // Aggiungere bottoni di start/stop e di inversione del meccanismo di autoplay.
 
 const carouselWrapperDom = document.getElementById('carousel');
-
+const thumbnailWrapperDom = document.getElementById('thumbnails');
+const prevBtn = document.getElementById('prev_slide');
+const nextBtn = document.getElementById('next_slide');
 const images = [
     {
         image: 'img/01.webp',
@@ -36,18 +32,17 @@ const images = [
         text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
     }
 ];
-
-let slideNodeList = [];
+const slideNodeList = [];
+thumbnailsNodeList = [];
 
 images.forEach(image => {
     slideNodeList.push(createSlide(carouselWrapperDom, image));
+    thumbnailsNodeList.push(createThumbnails(thumbnailWrapperDom, image));
 });
-
-const prevBtn = document.getElementById('prev_slide');
-const nextBtn = document.getElementById('next_slide');
 
 let slideIndex = 0;
 slideNodeList[slideIndex].classList.add('active');
+thumbnailsNodeList[slideIndex].classList.add('active');
 
 prevBtn.addEventListener('click', () => {
     slideIndex--;
@@ -55,24 +50,37 @@ prevBtn.addEventListener('click', () => {
         slideIndex = slideNodeList.length - 1;
     }
     slideNodeList[slideIndex].classList.add('active');
+    thumbnailsNodeList[slideIndex].classList.add('active');
+
     slideNodeList.forEach((slide, index) => {
         if (index != slideIndex){
             slide.classList.remove('active');
         }
-    })
+    });
+    thumbnailsNodeList.forEach((thumb, index) => {
+        if (index != slideIndex){
+            thumb.classList.remove('active');
+        }
+    });
 });
 
 nextBtn.addEventListener('click', () => {
     slideIndex++;
     if (slideIndex > slideNodeList.length - 1){
         slideIndex = 0;
-    }
+    };
     slideNodeList[slideIndex].classList.add('active');
+    thumbnailsNodeList[slideIndex].classList.add('active');
     slideNodeList.forEach((slide, index) => {
         if (index != slideIndex){
             slide.classList.remove('active');
         }
-    })
+    });
+    thumbnailsNodeList.forEach((thumb, index) => {
+        if (index != slideIndex){
+            thumb.classList.remove('active');
+        }
+    });
 });
 
 function createSlide(parentDom, object){
@@ -87,4 +95,12 @@ function createSlide(parentDom, object){
     slide.appendChild(slideDescription);
     parentDom.appendChild(slide);
     return slide;
+}
+
+function createThumbnails(parentDom, object){
+    let thumb = document.createElement('div');
+    thumb.classList.add('thumbnail');
+    thumb.style.backgroundImage = "url('" + object.image + "')";
+    parentDom.appendChild(thumb);
+    return thumb;
 }
