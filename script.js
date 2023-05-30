@@ -64,7 +64,7 @@ prevBtn.addEventListener('click', () => {
 
 nextBtn.addEventListener('click', nextslide);
 
-setInterval(nextslide, 3000);
+let autoplay = setInterval(nextslide, 3000);
 
 function nextslide(){
     slideIndex++;
@@ -83,6 +83,8 @@ function nextslide(){
             thumb.classList.remove('active');
         }
     });
+    clearInterval(autoplay);
+    autoplay = setInterval(nextslide, 3000);
 };
 
 function createSlide(parentDom, object){
