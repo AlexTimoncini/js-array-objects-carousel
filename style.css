@@ -9,14 +9,14 @@ box-sizing: border-box;
 body{
     height: 100vh;
     background-color: rgb(124, 118, 151);
-    padding-top: 5rem;
+    padding-top: 7rem;
 }
 
 section#jumbotron{
     display: flex;
     align-items: center;
     height: 50%;
-    max-width: 1200px;
+    max-width: 1500px;
     margin: 0 auto;
     flex-direction: column;
 }
@@ -26,6 +26,23 @@ section#jumbotron{
     width: 100%;
     display: flex;
     position: relative;
+}
+
+#carousel button{
+    border: none;
+    position: absolute;
+    z-index: 2;
+    font-size: 3rem;
+    background: none;
+    right: 10px;
+    color: #fff;
+    opacity: 0.5;
+    transition: all 0.2s ease-in;
+    cursor: pointer;
+}
+
+#carousel button:hover{
+    opacity: 0.8;
 }
 
 .slide{

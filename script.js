@@ -1,5 +1,3 @@
-// BONUS 2:
-// Aggiungere funzionalità di autoplay: dopo un certo periodo di tempo (3 secondi) l’immagine attiva dovrà cambiare alla successiva.
 // BONUS 3:
 // Aggiungere bottoni di start/stop e di inversione del meccanismo di autoplay.
 
@@ -7,6 +5,8 @@ const carouselWrapperDom = document.getElementById('carousel');
 const thumbnailWrapperDom = document.getElementById('thumbnails');
 const prevBtn = document.getElementById('prev_slide');
 const nextBtn = document.getElementById('next_slide');
+const playPauseBtn = document.getElementById('play_pause_carousel');
+let playPauseState = true;
 const images = [
     {
         image: 'img/01.webp',
@@ -41,6 +41,7 @@ images.forEach(image => {
 let slideIndex = 0;
 slideNodeList[slideIndex].classList.add('active');
 thumbnailsNodeList[slideIndex].classList.add('active');
+let autoplay = setInterval(nextslide, 3000);
 
 prevBtn.addEventListener('click', () => {
     slideIndex--;
@@ -61,10 +62,21 @@ prevBtn.addEventListener('click', () => {
         }
     });
 });
-
 nextBtn.addEventListener('click', nextslide);
 
-let autoplay = setInterval(nextslide, 3000);
+playPauseBtn.addEventListener('click', () =>{
+    if(playPauseState){
+        playPauseBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
+        clearInterval(autoplay);
+        playPauseState = false;
+    } else {
+        playPauseBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
+        autoplay = setInterval(nextslide, 3000);
+        playPauseState = true;
+    }
+});
+
+
 
 function nextslide(){
     slideIndex++;
