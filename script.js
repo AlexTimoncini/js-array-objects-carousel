@@ -1,5 +1,3 @@
-// BONUS 1:
-// Aggiungere le thumbnails (sottoforma di miniatura) ed al click attivare l’immagine corrispondente.
 // BONUS 2:
 // Aggiungere funzionalità di autoplay: dopo un certo periodo di tempo (3 secondi) l’immagine attiva dovrà cambiare alla successiva.
 // BONUS 3:
@@ -64,7 +62,11 @@ prevBtn.addEventListener('click', () => {
     });
 });
 
-nextBtn.addEventListener('click', () => {
+nextBtn.addEventListener('click', nextslide);
+
+setInterval(nextslide, 3000);
+
+function nextslide(){
     slideIndex++;
     if (slideIndex > slideNodeList.length - 1){
         slideIndex = 0;
@@ -81,7 +83,7 @@ nextBtn.addEventListener('click', () => {
             thumb.classList.remove('active');
         }
     });
-});
+};
 
 function createSlide(parentDom, object){
     let slide = document.createElement('div');
