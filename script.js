@@ -30,15 +30,33 @@ const images = [
 const slideNodeList = [];
 thumbnailsNodeList = [];
 
-images.forEach(image => {
+let slideIndex = 0;
+let autoplay = setInterval(nextslide, 3000);
+
+images.forEach((image, index) => {
     slideNodeList.push(createSlide(carouselWrapperDom, image));
-    thumbnailsNodeList.push(createThumbnails(thumbnailWrapperDom, image));
+    thumbnailsNodeList.push(createThumbnails(thumbnailWrapperDom, image, slideIndex, index));
+    thumbnailsNodeList[index].addEventListener('click', ()=> {
+        slideIndex = index;
+        slideNodeList[slideIndex].classList.add('active');
+        thumbnailsNodeList[slideIndex].classList.add('active');
+        slideNodeList.forEach((slide, index) => {
+            if (index != slideIndex){
+                slide.classList.remove('active');
+            }
+        });
+        thumbnailsNodeList.forEach((thumb, index) => {
+            if (index != slideIndex){
+                thumb.classList.remove('active');
+            }
+        });
+        clearInterval(autoplay);
+        autoplay = setInterval(nextslide, 3000);
+    })
 });
 
-let slideIndex = 0;
 slideNodeList[slideIndex].classList.add('active');
 thumbnailsNodeList[slideIndex].classList.add('active');
-let autoplay = setInterval(nextslide, 3000);
 
 prevBtn.addEventListener('click', () => {
     slideIndex--;
@@ -59,6 +77,7 @@ prevBtn.addEventListener('click', () => {
         }
     });
 });
+
 nextBtn.addEventListener('click', nextslide);
 
 playPauseBtn.addEventListener('click', () =>{
